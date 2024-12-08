@@ -1,0 +1,47 @@
+[
+  {
+    "table_name": "users",
+    "columns": ["id INT", "name VARCHAR(255)", "email VARCHAR(255)"],
+    "primary_keys": ["id"],
+    "foreign_keys": []
+  },
+  {
+    "table_name": "categories",
+    "columns": ["id INT", "name VARCHAR(255)"],
+    "primary_keys": ["id"],
+    "foreign_keys": []
+  },
+  {
+    "table_name": "products",
+    "columns": ["id INT", "name VARCHAR(255)", "category_id INT"],
+    "primary_keys": ["id"],
+    "foreign_keys": [
+      {
+        "column": "category_id",
+        "reference": "categories",
+        "reference_column": "id"
+      }
+    ]
+  },
+  {
+    "table_name": "orders",
+    "columns": ["id INT", "user_id INT", "created_at DATETIME"],
+    "primary_keys": ["id"],
+    "foreign_keys": [
+      { "column": "user_id", "reference": "users", "reference_column": "id" }
+    ]
+  },
+  {
+    "table_name": "order_items",
+    "columns": ["id INT", "order_id INT", "product_id INT", "quantity INT"],
+    "primary_keys": ["id"],
+    "foreign_keys": [
+      { "column": "order_id", "reference": "orders", "reference_column": "id" },
+      {
+        "column": "product_id",
+        "reference": "products",
+        "reference_column": "id"
+      }
+    ]
+  }
+]
